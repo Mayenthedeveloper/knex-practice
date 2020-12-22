@@ -37,14 +37,22 @@ describe(`Articles service object`, function() {
 
    before(() => {
        return db
-     .into('blogful_articles')
+        .into('blogful_articles')
          .insert(testArticles)
      })
 
      after(() => db.destroy())
 
-    describe(`getAllArticles()`, () =>{
-        it(`resolves all articles from 'blogful_articles' table`, () =>{
+
+    context(`Given 'blogful_articles' has data`, () => {
+               before(() => {
+                 return db
+                   .into('blogful_articles')
+                   .insert(testArticles)
+               })
+
+
+        it(` getAllArticles() resolves all articles from 'blogful_articles' table`, () =>{
            // test that ArticlesService.getAllArticles gets data from table 
 
            return ArticlesService.getAllArticles(db)
@@ -55,5 +63,14 @@ describe(`Articles service object`, function() {
                     })))
        })
         })
+
+         context(`Given 'blogful_articles' has no data`, () => {
+               it(`getAllArticles() resolves an empty array`, () => {
+                 return ArticlesService.getAllArticles(db)
+                   .then(actual => {
+                     expect(actual).to.eql([])
+                   })
+               })
+             })
     })
   })
