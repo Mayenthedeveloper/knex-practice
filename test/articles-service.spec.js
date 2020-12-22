@@ -25,7 +25,7 @@ describe(`Articles service object`, function() {
              },
            ]
            
-    before(() => db('blogful_articles').truncate())
+    // before(() => db('blogful_articles').truncate())
         
    before(() => {
     db = knex({
@@ -40,6 +40,9 @@ describe(`Articles service object`, function() {
         .into('blogful_articles')
          .insert(testArticles)
      })
+     before(() => db('blogful_articles').truncate())
+
+     afterEach(() => db('blogful_articles').truncate())
 
      after(() => db.destroy())
 
