@@ -19,4 +19,5 @@ VALUES
   ('hds', 'hds channel' ,'2016-01-16 12:00:00'),
   ('fknhu', 'fknhu channel' ,'2016-01-16 12:00:00');
 
+
   COMMIT;
